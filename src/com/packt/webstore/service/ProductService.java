@@ -7,5 +7,6 @@ import com.packt.webstore.domain.Product;
 public interface ProductService {
 	
 	public List <Product> getAllProducts();
-
+	public Product getProductById(String productId);
+	public List <Product> getProductByCategory(String category);
 }
