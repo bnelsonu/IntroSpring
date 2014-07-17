@@ -102,6 +102,8 @@ public class InMemoryProductRepository implements ProductRepository{
 		
 		Set <Product> productsByBrand = new HashSet<Product>();
 		Set <Product> productsByCategory = new HashSet<Product>();
+		Set <Product> productsByManufacturer = new HashSet<Product>();
+		
 		
 		Set <String> criterias = filterParams.keySet();
 		
@@ -127,8 +129,38 @@ public class InMemoryProductRepository implements ProductRepository{
 			} 
 		}
 		
+		if (criterias.contains("price"))
+		{
+			for (String category: filterParams.get("price"))
+			{
+				productsByManufacturer.addAll(this.getProductByCategory(category));
+			} 
+		}
+		
 		productsByCategory.retainAll(productsByBrand);
 						
 		return productsByCategory;
 	}
+
+	@Override
+	public List<Product> getProductsByManufacturer(String manufacturer) {
+
+		List <Product> productsByManufacturer = new ArrayList<Product>();
+		
+		
+		for(Product product: listOfProducts )
+		{
+			
+			if (manufacturer.equalsIgnoreCase(product.getManufacturer()))
+			{
+				productsByManufacturer.add(product);
+			}
+		}
+		
+		return productsByManufacturer;
+	}
+	
+	
+	
+	
 }

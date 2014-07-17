@@ -53,5 +53,12 @@ public class ProductController {
 		return "product";
 	}
 	
+	@RequestMapping("/{category}/{price}")
+	public String getProductsByFilter(@MatrixVariable(pathVar="price") Map <String,List<String>> 
+	filterParams,Model model){
+		model.addAttribute("products", productService.getProductByFilter(filterParams));
+		return "products";
+	}
+	
 	
 }
