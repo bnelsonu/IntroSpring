@@ -9,7 +9,7 @@ public class HomeController {
 	
 	@RequestMapping("/") 
 	public String welcome(Model model){
-		
+		/*from de model to the controller*/
 		model.addAttribute("greeting","Welcome to WebStore!");
 		model.addAttribute("tagline","The one and only amazing web store");
 		

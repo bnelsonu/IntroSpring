@@ -159,6 +159,16 @@ public class InMemoryProductRepository implements ProductRepository{
 		
 		return productsByManufacturer;
 	}
+
+	@Override
+	/**
+	 * @description creating a new product from the view to the model
+	 */
+	public void addProduct(Product product) {		
+		listOfProducts.add(product);
+	}
+	
+	
 	
 	
 	
