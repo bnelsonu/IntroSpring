@@ -6,6 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,6 +62,8 @@ public class ProductController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String getAddNewProductForm(Model model){
+		
+		//since the get is called first than the post, we create first a key value parameter in the model
 		Product newProduct = new Product();
 		model.addAttribute("newProduct",newProduct);
 		return "addProduct";
@@ -65,11 +71,28 @@ public class ProductController {
 	
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct){
+	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct,
+			BindingResult result){
+
 		
+		//
+		String [] supressedFields = result.getSuppressedFields();
+		if(supressedFields.length > 0)
+		{
+			throw new RuntimeException("Attempting to bind disallowed fields:" + StringUtils.arrayToCommaDelimitedString(supressedFields));
+		}
+		
+		//modelAttribute is populated with data enter in the form 
 		productService.addProduct(newProduct);
+		//using pattern redirect after post
+		return "redirect:/products";
+	}
+	
+
+	@InitBinder
+	public void initialiseBinder(WebDataBinder binder){
 		
-		return "redirect:products";
+		binder.setDisallowedFields("unitsInOrder","discontinued");
 	}
 	
 	

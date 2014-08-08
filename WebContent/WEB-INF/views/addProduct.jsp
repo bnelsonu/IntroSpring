@@ -20,13 +20,19 @@
 			</div>
 		 </section>
 		 <section class="container">
-		 	<form:form modelAttribute="newProduct" class="form-horizontal">
+		 	<form:form modelAttribute="newProduct" class="form-horizontal" action="/products/add">
 		 		<fieldset>
 		 			<legend>Add new Product</legend>
 		 			<div class="form-group">
-		 				<label class="control-label col-lg-2 col-lg-2" for="productoId">Product Id</label>
+		 				<label class="control-label col-lg-2 col-lg-2" for="productoId"><spring:message code="addProduct.form.productId.label"/></label>
 		 				<div class="col-lg-10">
 		 					<form:input id="productoId" path="productoId" type="text" class="form:input-large"/>
+		 				</div>
+		 			</div>
+		 			<div class="form-group">
+		 				<label class="control-label col-lg-2 col-lg-2" for="productoId">Name</label>
+		 				<div class="col-lg-10">
+		 					<form:input id="name" path="name" type="text" class="form:input-large"/>
 		 				</div>
 		 			</div>
 		 			<div class="form-group">
@@ -52,25 +58,11 @@
 		 					<form:input id="unitsInStock" path="unitsInStock" type="text" class="form:input-large"/>
 		 				</div>
 		 			</div>
-		 			<div class="form-group">
-		 				<label class="control-label col-lg-2 col-lg-2" for="productoId">Units in Order</label>
-		 				<div class="col-lg-10">
-		 					<form:input id="unitsInOrder" path="unitsInOrder" type="text" class="form:input-large"/>
-		 				</div>
-		 			</div>
-		 			
-		 			
 		 			<!-- Similary bind form:input  tag or name, unitPrice, manufacturer, category, unitsInStock and unitsInOrder-->
 		 			<div class="form-group">
 		 				<label class="control-label col-lg-2" for="description">Description</label>
 		 				<div class="col-lg-10">
 		 					<form:textarea id="description" path="description" rows="2"/>
-		 				</div>
-		 			</div>
-		 			<div class="form-group">
-		 				<label class="control-label col-lg-2"  for="discontinued">Discontinued</label>
-		 				<div class="col-lg-10">
-		 					<form:checkbox id="discontinued" path="discontinued"/>
 		 				</div>
 		 			</div>
 		 			<div class="form-group">
